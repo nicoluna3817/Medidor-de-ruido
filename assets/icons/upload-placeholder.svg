@@ -1,0 +1,17 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#F9F9F9"/>
+  <g fill="#999">
+    <!-- Celular -->
+    <rect x="50" y="50" width="40" height="90" rx="8" stroke="#999" stroke-width="4"/>
+    <circle cx="70" cy="132" r="4" fill="#999"/>
+    <!-- Carpeta -->
+    <path d="M150 90 h30 l10 10 h40 v50 h-80 z" stroke="#999" stroke-width="4" fill="none"/>
+    <path d="M150 90 l10 -10 h30 l10 10" stroke="#999" stroke-width="4" fill="none"/>
+    <!-- Computadora -->
+    <rect x="60" y="160" width="140" height="60" rx="6" stroke="#999" stroke-width="4" fill="none"/>
+    <rect x="80" y="180" width="100" height="30" rx="4" fill="#999"/>
+    <!-- Flecha arriba -->
+    <path d="M128 70 v20" stroke="#999" stroke-width="4" stroke-linecap="round"/>
+    <path d="M118 80 l10 -10 l10 10" stroke="#999" stroke-width="4" fill="none"/>
+  </g>
+</svg>
