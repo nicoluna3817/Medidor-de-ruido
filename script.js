@@ -914,7 +914,9 @@ function mostrarPopupVictoria(total) {
   }
 
   // 3. Actualizar toda la UI de contadores
+  // Refrescar contadores de la sección de misión y del cartel superior
   refrescarProgresosPremios();
+  mostrarCartelProgresoPremio();
   
   const resumenCompleto = document.getElementById("texto-resumen-estrellas");
   if (resumenCompleto) {
@@ -975,7 +977,9 @@ function mostrarPopupVictoria(total) {
       // Limpiar el premio ganado para poder empezar uno nuevo
       const key = tipoMision === "diario" ? "premio-diario" : "premio-semanal";
       localStorage.removeItem(key);
+      // Al remover el premio se debe actualizar toda la visualización de progreso
       refrescarProgresosPremios(); // Refrescar UI de configuración
+      mostrarCartelProgresoPremio();
 
     } else {
       pestañaActual = 0; // Quedarse en la primera página
