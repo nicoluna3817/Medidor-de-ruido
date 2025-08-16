@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medidor de Ruido</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 🔘 Botones laterales -->
+    <div class="sidebar">
+      <div id="mision-actions" style="margin-bottom: 20px; display: none;">
+        <button id="btn-cancelar-mision" title="Cancelar misión"></button>
+      </div>
+      <button id="btnPlayPause">⏯️</button>
+      <button id="boton-config">⚙️</button>
+      <button id="btnFullScreen">🖥️</button>
+    </div>
+
+    <!-- 🎛️ Medidor -->
+    <div class="medidor">
+      <div class="dial-estilizado">
+        <img src="assets/dial-base.png" class="fondo-dial" />
+        <div id="agujaEstilizada" class="aguja-dial"></div>
+      </div>
+    </div>
+
+    <!-- 🖼️ Fondo -->
+    <div class="fondo" id="fondoVisual"></div>
+
+  </div>
+
+  <!-- ⚙️ Ventana de Configuración -->
+  <div id="configuracion" class="ventana-config" style="display: none;">
+    <div class="config-container">
+      <!-- Columna izquierda: menú -->
+      <div class="config-menu">
+        <button data-panel="microfono">🎙️ Micrófono</button>
+        <button data-panel="fondos">🖼️ Fondos</button>
+        <button data-panel="mision">⭐ Misión Grupal</button>
+      </div>
+  
+      <!-- Columna derecha: panel dinámico -->
+      <div class="config-panel">
+        <button id="cerrar-config" class="boton-cerrar">✔ Hecho</button>
+        <div id="panel-contenido">Seleccioná una opción de la izquierda</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD Misión -->
+  <div id="mision-hud" class="hud-mision" style="display:none;">
+    <div class="hud-fila-superior">
+      <div id="barra-estrellas" class="estrellas"></div>
+      <div id="temporizador" class="temporizador"></div>
+    </div>
+    <div class="hud-fila-inferior">
+      <div id="cartel-progreso-premio" class="cartel-progreso-premio" style="display:none;">
+        <p id="texto-progreso-premio"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audios -->
+  <audio id="sonido-ganar" src="assets/sounds/estrella-ganada.mp3" preload="auto"></audio>
+  <audio id="sonido-perder" src="assets/sounds/estrella-perdida.mp3" preload="auto"></audio>
+  <audio id="sonido-mision" src="assets/sounds/mision-completa.mp3" preload="auto"></audio>
+
+  <!-- POPUP VICTORIA MULTI-PESTAÑA -->
+  <div id="popup-victoria" class="popup-victoria" style="display:none;">
+    <div style="background:#fff; padding:20px; border-radius:10px; max-width:400px; width:90%;">
+      
+      <!-- Pestaña 1 -->
+      <div class="pestaña popup-page">
+        <h1>🎉 ¡Misión cumplida!</h1>
+        <p id="texto-resumen-estrellas"></p>
+        <p>Calificación: <strong id="resumen-nota">-</strong></p>
+        <p id="resumen-mensaje">¡Buen trabajo en equipo!</p>
+        <p>Ganaron <span id="popup-estrellas-ganadas">0</span> estrellas</p>
+        <button id="btn-popup-siguiente" onclick="cambiarPestaña(+1)">➡️ Ver más</button>
+      </div>
+
+      <!-- Pestaña 3 -->
+      <div class="pestaña popup-page">
+        <h2>📊 Progreso General</h2>
+        <p>Total de estrellas acumuladas: <span id="total-estrellas-acum">0</span></p>
+        <p id="mensaje-desafio" style="display:none;"></p>
+        <button id="btn-popup-anterior" onclick="cambiarPestaña(-1)">⬅️ Volver</button>
+        <button id="btn-cerrar-progreso" onclick="terminarMision()">✔️ Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POP-UP SESIÓN -->
+  <div id="popup-sesion" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:999;">
+    <div style="background:#fff; padding:20px; border-radius:10px; max-width:300px; width:90%;">
+      <h2 id="popup-titulo">Sesión</h2>
+      <label>⏲️ Tiempo de sesión (min): <input type="number" id="sesion-tiempo" value="10"></label><br/><br/>
+      <label>⭐ Meta de estrellas: <input type="number" id="sesion-meta" min="1" value="5"></label><br/><br/>
+      <div id="mensaje-error-meta" style="color: red; display: none;"></div>
+      <div id="opcion-sumar-semanal">
+        <label><input type="checkbox" id="sesion-sumar-semanal"> Sumar estrellas al semanal</label>
+      </div>
+      <br/>
+      <button id="btn-comenzar-sesion">🚀 Comenzar sesión</button>
+      <button id="btn-cerrar-popup">❌ Cancelar</button>
+    </div>
+  </div>
+
+  <!-- ✅ Script al final para que todos los elementos estén cargados -->
+  <script src="script.js"></script>
+</body>
+</html>
